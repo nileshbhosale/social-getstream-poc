@@ -46,16 +46,25 @@ public class GetStream {
     }
 
 
-
+    /**
+     * All users public feed must be followed by system public feed.
+     * @param user
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public void addToPublicList(User user) throws IOException, StreamClientException {
         Feed publicFeed= streamClient.newFeed("user",Constants.PUBLICFEEDNAME );
         Feed userFeed= streamClient.newFeed("user",String.valueOf(user.getId()));
         publicFeed.follow("user",String.valueOf(user.getId()) );
-
-
-
     }
 
+    /**
+     * Tweet to user's public feed
+     * @param tweet
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public Tweet tweetPublic(Tweet tweet) throws IOException, StreamClientException {
         // Instantiate a feed object
         Feed feed = streamClient.newFeed("user", String.valueOf(tweet.getUser().getId()));
@@ -63,6 +72,13 @@ public class GetStream {
         return tweet;
     }
 
+    /**
+     * Tweet to user's private feed
+     * @param tweet
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public Tweet tweetPrivate(Tweet tweet) throws IOException, StreamClientException {
         // Instantiate a feed object
         Feed feed = streamClient.newFeed("flat", String.valueOf(tweet.getUser().getId()));
@@ -70,9 +86,16 @@ public class GetStream {
         return tweet;
     }
 
+    /**
+     * Post an tweet to a feed.
+     * @param feed
+     * @param tweet
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
     private SimpleActivity addActivity( Feed feed,Tweet tweet) throws IOException, StreamClientException {
 
-        // Add an activity to the feed, where actor, object and target are references to objects (`Alessandro`, `Fuerteventura`, `Places to Visit`)
         SimpleActivity activity = new SimpleActivity();
         activity.setActor("User:"+tweet.getUser().getId());
         activity.setObject(tweet.getTweet());
@@ -85,6 +108,12 @@ public class GetStream {
         return response;
     }
 
+    /**
+     * Follow user
+     * @param connection
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public void follow(Connection connection) throws IOException, StreamClientException {
         Feed feed = streamClient.newFeed("flat", String.valueOf(connection.getFollowerId()));
         Feed aggregated = streamClient.newFeed("aggregated", String.valueOf(connection.getFollowerId()));
@@ -96,6 +125,12 @@ public class GetStream {
         notification.follow("flat",String.valueOf(connection.getFolloweeId()));
     }
 
+    /**
+     * Unfollow user
+     * @param connection
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public void unFollow(Connection connection) throws IOException, StreamClientException {
         Feed feed = streamClient.newFeed("flat", String.valueOf(connection.getFollowerId()));
         Feed aggregated = streamClient.newFeed("aggregated", String.valueOf(connection.getFollowerId()));
@@ -107,7 +142,12 @@ public class GetStream {
         notification.unfollow("flat",String.valueOf(connection.getFolloweeId()));
     }
 
-
+    /**
+     * Retrieve system public feeds
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public List<SimpleActivity> getPublicFeeds() throws IOException, StreamClientException {
         // Get activities from 5 to 10 (using offset pagination)
         FeedFilter filter = new FeedFilter.Builder().withLimit(5).withOffset(0).build();
@@ -135,6 +175,13 @@ public class GetStream {
         return activities;
     }*/
 
+    /**
+     * Retrieve private feed of user
+     * @param user
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
     public List<SimpleActivity> getFlatFeeds(User user)  throws IOException, StreamClientException{
         // Get activities from 5 to 10 (using offset pagination)
         FeedFilter filter = new FeedFilter.Builder().withLimit(5).withOffset(0).build();
@@ -148,5 +195,16 @@ public class GetStream {
         return activities;
     }
 
+    /**
+     * Get public feed token
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
+    public String getPublicFeedToken()throws IOException, StreamClientException {
+        Feed feed = streamClient.newFeed("flat", Constants.PUBLICFEEDNAME);
+        return feed.getToken();
+    }
 
-}
+
+    }

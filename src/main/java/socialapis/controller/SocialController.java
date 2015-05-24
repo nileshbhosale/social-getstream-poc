@@ -168,5 +168,17 @@ public class SocialController {
         return activities;
     }
 
+    /**
+     * Get public feeds token
+     * @param userid
+     * @param action
+     * @return
+     */
+    @RequestMapping(value = "/feed/token", method = RequestMethod.GET)
+    @ResponseBody
+    public String getPublicFeedToken() throws IOException, StreamClientException {
+        return getStream.getPublicFeedToken();
+    }
+
 
 }

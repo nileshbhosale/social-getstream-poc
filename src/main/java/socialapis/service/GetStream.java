@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import socialapis.domain.Connection;
+import socialapis.domain.Message;
 import socialapis.domain.Tweet;
 import socialapis.domain.User;
 import socialapis.util.Constants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -206,5 +208,41 @@ public class GetStream {
         return feed.getToken();
     }
 
+    /**
+     * Sends a message to messages feed. Note message bean contains to, foreignId, userId and resellerId.
+     *@param message
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
+    public String sendMessage(Message message) throws IOException, StreamClientException {
 
+        message.setActor(String.valueOf(message.getFromUser()));
+        message.setObject(message.getMessage());
+        message.setVerb("msg:"+(message.getFromUser()>
+               message.getToUser()?
+                message.getToUser()+","+message.getFromUser()
+                :message.getFromUser()+","+message.getToUser()));//For maintaining unique ordered verb for every conversation.
+        ArrayList ids=new ArrayList();
+        ids.add(String.valueOf(message.getToUser()));
+        message.setTo(ids);
+        String messageId=postMessagesActivityService(message,String.valueOf(message.getFromUser()));
+        return messageId;
+    }
+
+    /**
+     * post Messages to GetStream
+     * @param userId
+     * @return
+     * @throws IOException
+     * @throws StreamClientException
+     */
+    private String postMessagesActivityService(Message message,String userId) throws IOException, StreamClientException {
+        Feed feed = streamClient.newFeed("messages", userId);//messages is an notification type feed.
+        AggregatedActivityServiceImpl<Message> aggregatedActivityService =  feed.newAggregatedActivityService(Message.class);
+        message = aggregatedActivityService.addActivity(message); //Code breaks here
+        //On debugging error message found is BadRequest
+
+        return message.getId();
+    }
     }

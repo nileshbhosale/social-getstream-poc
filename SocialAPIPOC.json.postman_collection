@@ -10,7 +10,8 @@
 		"63c63b65-3ed9-6795-5150-ecdfd83045ca",
 		"ece18a30-c1cb-ed3e-19f4-201dc19a5501",
 		"7103903f-5429-874d-483d-dd6f93914b39",
-		"acda0702-be6a-cf79-7060-c2549702a452"
+		"acda0702-be6a-cf79-7060-c2549702a452",
+		"7cfd212d-b1b9-fc9e-f0c8-6b6fc5f0caae"
 	],
 	"folders": [],
 	"timestamp": 1431852128060,
@@ -21,7 +22,6 @@
 	"remoteLink": "",
 	"public": false,
 	"write": true,
-	"hasRequests": true,
 	"requests": [
 		{
 			"id": "11562ece-7549-683e-dee8-545deb492693",
@@ -111,6 +111,27 @@
 			"owner": 0
 		},
 		{
+			"id": "7cfd212d-b1b9-fc9e-f0c8-6b6fc5f0caae",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8080/socialapis/v1/message/send",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1434179350647,
+			"name": "Send Message",
+			"description": "",
+			"collectionId": "7ad386ec-a332-f09a-ab11-697f3da2e4a2",
+			"responses": [],
+			"synced": false,
+			"rawModeData": "{\n\"followeeId\":1,\n\"followerId\":2\n}"
+		},
+		{
 			"id": "acda0702-be6a-cf79-7060-c2549702a452",
 			"headers": "Content-Type: application/json\n",
 			"url": "http://localhost:8080/socialapis/v1/feed/token",
@@ -128,7 +149,8 @@
 			"description": "",
 			"collectionId": "7ad386ec-a332-f09a-ab11-697f3da2e4a2",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0
 		},
 		{
 			"id": "cae1ef29-316e-9310-9e79-5673c303b512",

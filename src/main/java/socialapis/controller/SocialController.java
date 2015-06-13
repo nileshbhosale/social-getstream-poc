@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import socialapis.dao.ConnectionDao;
 import socialapis.dao.UserDao;
 import socialapis.domain.Connection;
+import socialapis.domain.Message;
 import socialapis.domain.Tweet;
 import socialapis.domain.User;
 import socialapis.service.GetStream;
@@ -170,8 +171,6 @@ public class SocialController {
 
     /**
      * Get public feeds token
-     * @param userid
-     * @param action
      * @return
      */
     @RequestMapping(value = "/feed/token", method = RequestMethod.GET)
@@ -180,5 +179,15 @@ public class SocialController {
         return getStream.getPublicFeedToken();
     }
 
+    /**
+     * Sends a message
+     * @return
+     */
+    @RequestMapping(value = "/message/send", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendMessage(@RequestBody Message message) throws IOException, StreamClientException {
+
+        return getStream.sendMessage(message);
+    }
 
 }

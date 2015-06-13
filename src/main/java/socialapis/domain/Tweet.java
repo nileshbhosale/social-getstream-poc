@@ -1,8 +1,11 @@
 package socialapis.domain;
 
+import lombok.Data;
+
 /**
  * Created by Nilesh Bhosale
  */
+@Data
 public class Tweet {
     private String id;
 
@@ -10,27 +13,4 @@ public class Tweet {
 
     private User user;
 
-    public String getTweet() {
-        return tweet;
-    }
-
-    public void setTweet(String tweet) {
-        this.tweet = tweet;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

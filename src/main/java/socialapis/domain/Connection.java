@@ -4,6 +4,7 @@ package socialapis.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,8 +15,10 @@ import java.util.Map;
 /**
  * Created by Nilesh Bhosale
  */
+
 @Entity
 @Table(name = "connection")
+@Data
 public class Connection {
 
     @Id
@@ -27,28 +30,4 @@ public class Connection {
     @Column(name = "follower_id")
     private long followerId;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-    public long getFolloweeId() {
-        return followeeId;
-    }
-
-    public void setFolloweeId(long followeeId) {
-        this.followeeId = followeeId;
-    }
-
-    public long getFollowerId() {
-        return followerId;
-    }
-
-    public void setFollowerId(long followerId) {
-        this.followerId = followerId;
-    }
 }

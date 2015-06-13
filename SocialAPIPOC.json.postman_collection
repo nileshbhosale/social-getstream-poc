@@ -22,6 +22,7 @@
 	"remoteLink": "",
 	"public": false,
 	"write": true,
+	"hasRequests": true,
 	"requests": [
 		{
 			"id": "11562ece-7549-683e-dee8-545deb492693",
@@ -81,7 +82,7 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1431859920582,
-			"name": "UnFollow User copy",
+			"name": "UnFollow User ",
 			"description": "",
 			"collectionId": "7ad386ec-a332-f09a-ab11-697f3da2e4a2",
 			"responses": [],
@@ -123,13 +124,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1434179350647,
+			"time": 1434182387846,
 			"name": "Send Message",
 			"description": "",
 			"collectionId": "7ad386ec-a332-f09a-ab11-697f3da2e4a2",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n\"followeeId\":1,\n\"followerId\":2\n}"
+			"rawModeData": "{\n\"fromUser\":1,\n\"toUser\":2,\n\"message\":\"Testing message with custom fields\"\n}"
 		},
 		{
 			"id": "acda0702-be6a-cf79-7060-c2549702a452",

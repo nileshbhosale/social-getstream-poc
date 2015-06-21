@@ -12,6 +12,8 @@ Password: root
 
 4. Browse to the folder location from cmd.
 run command 
+>mvn clean
+>mvn install
 >mvn spring-boot:run
 
 5. Browse to http://localhost:8080/ on the browser.
